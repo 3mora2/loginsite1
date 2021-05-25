@@ -1,0 +1,30 @@
+{% from "macros.html" import form_filed %}
+{% extends 'base.html' %}
+{% block title %}
+    Login Page
+{% endblock%}
+
+{% block content%}
+    <div class="text-center" style="margin: 20px">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            {{form_filed(form, "username")}}
+
+            {{form_filed(form, "password")}}
+
+            {{ form.submit(class='btn btn-outline-success') }}
+            {% if form.new_errors['csrf_token']%}
+                <small class="form-text text-muted ">
+                    Please Try Again
+                </small>
+            {% endif%}
+        </form>
+    </div>
+<script>
+
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+{% endblock %}

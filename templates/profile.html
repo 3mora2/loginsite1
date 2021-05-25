@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+    Profile Page
+{% endblock%}
+
+{% block content%}
+    <div class="text-center" style="margin: 25px">
+        Your Information :
+        <br>
+        Your Username : {{ current_user.username}}
+        <br>
+        Your Email : {{ current_user.email}}
+        <br>
+        Your wallet : {{current_user.wallet}}
+        <br>
+        <br>
+        Your Successful Login Date :
+        {% for date in all_date %}
+            <div class="">
+                {{date.strftime("%d/%m/%Y %H:%M:%S")}}
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}

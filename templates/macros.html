@@ -1,0 +1,12 @@
+{% macro form_filed(form, filed) %}
+    <div class="form-group">
+        {{ form[filed].label }}
+        {{ form[filed](class="form-control") }}
+        {% if form.new_errors[filed]%}
+            <small class="form-text text-muted ">
+
+                {{ form.new_errors[filed][0] }}
+            </small>
+        {% endif%}
+    </div>
+{% endmacro %}

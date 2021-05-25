@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Home Page
+{% endblock%}
+
+{% block content%}
+    <div class="text-center" style="margin: 25px">
+        {% for product in products %}
+        {% if product.owner%}
+        {% else %}
+            <div class="row " style="width: 350px; float: left; height: 450px; margin: 15px;">
+                <div>
+                    <a class="product-url link-primary" data-id="{{product.id}}" >
+                        <div style="margin: 5px;">
+                            <img src="{{ product.img.replace('600x600','300x300').replace('650x650','300x300')}}" class="card-img" style="height: 350px"/>
+                        </div>
+
+                        <div>
+                            <div class="name">{{ product.brand}}  {{product.name_en}}</div>
+                            <div class="price" >{{ product.price}} $</div>
+                        </div>
+                    </a>
+                    <form action="/buy-{{product.id}}" method="POST">
+                        <button class="btn btn-outline-success" type="submit" style="width: 50%"> Buy </button>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
