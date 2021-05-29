@@ -6,7 +6,6 @@ Your Product Page
 {% block content%}
     <div class="text-center" style="margin: 25px">
         {% for product in products %}
-        {% if product.owner == current_user.id%}
             <div class="row " style="width: 350px; float: left; height: 450px; margin: 15px;">
                 <div>
                     <a href="/product/{{product.id}}">
@@ -24,7 +23,7 @@ Your Product Page
                     </form>
                 </div>
             </div>
-        {% endif %}
+
         {% endfor %}
     </div>
 {% endblock %}

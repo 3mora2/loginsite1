@@ -18,6 +18,7 @@ Home Page
                         <div>
                             <div class="name">{{ product.brand}}  {{product.name_en}}</div>
                             <div class="price" >{{ product.price}} $</div>
+                            <div class="price" >{{ product.quantity}}</div>
                         </div>
                     </a>
                     <form action="/buy-{{product.id}}" method="POST">

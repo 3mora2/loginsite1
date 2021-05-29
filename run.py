@@ -16,3 +16,7 @@ pyinstaller -F --add-data "E:/Testing/loginsite/dbase.db;." --add-data "E:/Testi
 --hidden-import "jinja2"  
 "E:/Testing/loginsite/run.py"
 '''
+"""
+Login with api
+relation product and user
+"""

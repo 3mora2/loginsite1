@@ -3,6 +3,11 @@ from flask_bcrypt import check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 
+products = db.Table('prod',
+                    db.Column('product_id', db.Integer, db.ForeignKey('product.id'), primary_key=True),
+                    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
+                    )
+
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -12,7 +17,8 @@ class Product(db.Model):
     desk_en = db.Column(db.String())
     img = db.Column(db.String(), nullable=False)
     other_img = db.Column(db.String(), nullable=False)
-    owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
+    quantity = db.Column(db.Integer)
+    # owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
 
     @property
     def item_to_json(self):
@@ -24,18 +30,14 @@ class Product(db.Model):
                 }
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
-
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(), nullable=False, unique=True)
     email = db.Column(db.String(), nullable=False, unique=True)
     _password = db.Column(db.String(), nullable=False)
     wallet = db.Column(db.Integer, nullable=False, default=1000)
-    items = db.relationship('Product', backref='owned_user', lazy=True)
+    # items = db.relationship('Product', backref='owned_user', lazy=True)
+    items = db.relationship('Product', secondary=products, backref=db.backref('owned_user', lazy=True))
 
     @property
     def password(self):
